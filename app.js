@@ -1,4 +1,5 @@
 import express from "express";
+import supabaseService from "./supabaseService.js";
 
 
 const app = express();
@@ -9,26 +10,7 @@ app.use(express.static(PUBLIC_DIR));
 
 
 app.get("/id", (req, res) => { 
-    let id = Number(req.params["id"]); 
-
     
-    if (!id) {
-      let error = {
-        status: "error",
-        message: "Неверный ID",
-      };
-      res.statusCode = 400;
-      res.send(error);
-      return;
-    }
-  
-    let answer = {
-      status: "ok",
-      message: `Пользователь '${id}'`
-    }
-    
-    res.statusCode = 400;
-    res.send(answer);
   })
   
   app.post("/create", async (req, res) => {
@@ -42,9 +24,11 @@ app.get("/id", (req, res) => {
       return;
     }
   
-    let model = {
-      name: req.body.name
+    let name = {
+      name: req.body.name,
+      
     };
+    let data = await supabaseService.addModel(name);
   
     let answer = {
       status: "ok",
