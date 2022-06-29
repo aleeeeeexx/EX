@@ -12,31 +12,28 @@ app.use(express.static(PUBLIC_DIR));
 app.get("/id", (req, res) => { 
     
   })
+app.post("/create",  (req, res) => {
+
+  console.log(req.body);
+   // if (!req.body?.name ) {
+   //   let error = {
+   //     status: "error",
+   //     message: "Не хватает данных",
+   //   };
+   //   res.statusCode = 400;
+  //    res.send(error);
+  //    return;
+  //  }
+
+  //  let data = await supabaseService.addModel(name);
   
-  app.post("/create", async (req, res) => {
-    if (!req.body?.name ) {
-      let error = {
-        status: "error",
-        message: "Не хватает данных",
-      };
-      res.statusCode = 400;
-      res.send(error);
-      return;
-    }
+ //   let answer = {
+ //     status: "ok",
+ //     data
+ //   };
   
-    let name = {
-      name: req.body.name,
-      
-    };
-    let data = await supabaseService.addModel(name);
-  
-    let answer = {
-      status: "ok",
-      data
-    };
-  
-    res.statusCode = 200;
-    res.send(answer);
+ //   res.statusCode = 200;
+   // res.send(answer);
   });
   
 

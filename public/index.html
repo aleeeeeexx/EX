@@ -45,12 +45,14 @@ let form = document.forms[0];
   form.addEventListener("submit", (e) => { 
     e.preventDefault(); //preventDefault() - убирает стандартное поведение кнопки
 
-    let formData = new FormData(); 
-    formData.append("name", e.target.name.value);
+    let name = {
+      name: req.body,
+    }
+   
   
-    fetch('/create', { 
+    fetch('http://localhost:5500/create', { 
       method: "POST",
-      body: formData,
+      body: JSON.stringify(name),
     })
       .then((r) => r.json()) 
       .then((json) => {
