@@ -17,46 +17,85 @@
     <main>
     <form class="form-control" name="model" method="post" action="/create">
             
-        <div class="form-group">
-            <label >Название</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Введите имя" required />
-        </div>
+      <div class="form-group">
+        <label for="name">Название</label>
+        <input type="text" class="form-control" class="pole" id="name" name="name" placeholder="Введите имя" required />
+    </div>
+    <div class="form-group" style="margin-bottom: 20px;">
+        <label for="description">Описание</label>
+        <input type="text" class="form-control" class="pole" id="description" name="description" placeholder="Введите описание" />
+    </div>
         <button type="submit" class="btn btn-success" >Добавить модель</button>
     </form>
   </main>
     <footer>
       Фукина Александра Дмитриевна 201-324
     </footer>
+
+    <script>
+  
+
+      let name = document.getElementById('name')
+      let description = document.getElementById('description');
+  
+  name.addEventListener("input", (e) => {
+  
+      if (name.validity.typeMismatch) {
+          name.setCustomValidity("Неправельный тип данных!");
+          name.classList.add('active'); //красный фон
+          name.classList.remove('hover');
+      }
+      else {
+          name.setCustomValidity("");
+          name.classList.remove('active');
+          name.classList.add('hover');
+      }
+  
+      if (name.validity.valueMissing) {
+          name.setCustomValidity("Заполните пустые поля!");
+          name.classList.add('active'); //красный фон
+          name.classList.remove('hover');
+      }
+      else {
+          name.setCustomValidity("");
+          name.classList.remove('active');
+          name.classList.add('hover');
+      }
+  });
+  
+  
+  description.addEventListener("input", (e) => {
+  
+      if (description.validity.typeMismatch) {
+          description.setCustomValidity("Неправельный тип данных!");
+          description.classList.add('active'); //красный фон
+          description.classList.remove('hover');
+      }
+      else {
+          description.setCustomValidity("");
+          description.classList.remove('active');
+          description.classList.add('hover');
+      }
+  
+      if (description.validity.valueMissing) {
+          description.setCustomValidity("Заполните пустые поля!");
+          description.classList.add('active'); //красный фон
+          description.classList.remove('hover');
+      }
+      else {
+          description.setCustomValidity("");
+          description.classList.remove('active');
+          description.classList.add('hover');
+      }
+  });
+  
+  </script>
 </body>
 </html>
 
+
+
 <script>
-  let name = document.getElementById('name');
-
-name.addEventListener("input", (e) => {
-  
-
-  if (name.validity.typeMismatch) {
-      name.setCustomValidity("Неправельный тип данных!");
-      name.classList.add('active');
-  }
-  else {
-      name.setCustomValidity("");
-      name.classList.remove('active');
-  }
-
-  if (name.validity.valueMissing) {
-      name.setCustomValidity("Заполните пустые поля!");
-      name.classList.add('active');
-  }
-  else {
-      name.setCustomValidity("");
-      name.classList.remove('active');
-  }
-
-});
-
-
 
 let form = document.forms[0]; 
 
@@ -65,7 +104,7 @@ let form = document.forms[0];
 
     let formData = new FormData(); 
     formData.append("name", e.target.name.value);
-
+    formData.append("description", e.target.description.value);
     fetch('/create', { 
       method: "POST",
       body: formData,
