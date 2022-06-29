@@ -6,9 +6,11 @@ const app = express();
 const PUBLIC_DIR = "public";
 app.use(express.static(PUBLIC_DIR));
 
-app.get("/:id", (req, res) => { 
+
+
+app.get("/id", (req, res) => { 
     let id = Number(req.params["id"]); 
-    
+
     
     if (!id) {
       let error = {
@@ -22,7 +24,7 @@ app.get("/:id", (req, res) => {
   
     let answer = {
       status: "ok",
-      message: `Модель '${id}'`
+      message: `Пользователь '${id}'`
     }
     
     res.statusCode = 400;
@@ -30,7 +32,7 @@ app.get("/:id", (req, res) => {
   })
   
   app.post("/create", async (req, res) => {
-    if (!req.body.name ) {
+    if (!req.body?.name ) {
       let error = {
         status: "error",
         message: "Не хватает данных",
@@ -43,18 +45,6 @@ app.get("/:id", (req, res) => {
     let model = {
       name: req.body.name
     };
-  
-   // let data = await supabaseService.addModel(model);
-  
-   // if (!data) {
-    //  let error = {
-    //    status: "error",
-    //    message: "Ошибка при добавлении в базу данных",
-    //  };
-   //   res.statusCode = 400;
-   //   res.send(error);
-   //   return;
-  //  }
   
     let answer = {
       status: "ok",
